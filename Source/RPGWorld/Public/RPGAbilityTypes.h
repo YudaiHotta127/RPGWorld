@@ -3,6 +3,7 @@
 #include "GameplayEffectTypes.h"
 #include "RPGAbilityTypes.generated.h"
 
+
 USTRUCT(BlueprintType)
 struct FRPGGameplayEffectContext :public FGameplayEffectContext
 {
@@ -34,8 +35,7 @@ public:
 		return NewContext;
 	}
 
-	//カスタムシリアル化、サブクラスはこれをオーバライドする必要がある
-	//何かを複製できるようにしたい場合はこのネットシリアル化が必要
+	//特定のクラスまたは構造体のデータをシリアル化する方法を決定
 	virtual bool NetSerialize(FArchive& Ar, class UPackageMap* Map, bool& bOutSuccess);
 
 protected:

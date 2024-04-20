@@ -33,7 +33,7 @@ void ARPGPlayerController::PlayerTick(float DeltaTime)
 //ダメージ表示処理をサーバー上で呼び出せる
 void ARPGPlayerController::ShowDamageNumber_Implementation(float DamageAmount, ACharacter* TargetCharacter, bool bBlockedHit, bool bCriticalHit)
 {
-	if (IsValid(TargetCharacter)&&DamageTextComponentClass)
+	if (IsValid(TargetCharacter)&&DamageTextComponentClass&&IsLocalController())
 	{
 		//ウィジェットコンポーネントを動的に作成
 		UDamageTextComponent*DamageText=NewObject<UDamageTextComponent>(TargetCharacter, DamageTextComponentClass);

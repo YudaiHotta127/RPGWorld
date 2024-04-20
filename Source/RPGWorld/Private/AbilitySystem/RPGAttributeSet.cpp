@@ -190,7 +190,7 @@ void URPGAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Da
 {
 	if (Props.SourceCharacter != Props.TargetCharacter)
 	{
-		if (ARPGPlayerController* PC = Cast<ARPGPlayerController>(UGameplayStatics::GetPlayerController(Props.SourceCharacter, 0)))
+		if (ARPGPlayerController* PC = Cast<ARPGPlayerController>(Props.SourceCharacter->Controller))
 		{
 			PC->ShowDamageNumber(Damage, Props.TargetCharacter,bBlockedHit,bCriticalHit);
 		}
