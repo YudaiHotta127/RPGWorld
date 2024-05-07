@@ -9,6 +9,9 @@
 #include "AbilitySystem/RPGAbilitySystemLibrary.h"
 #include "UI/Widget/RPGUserWidget.h"
 #include "RPGGameplayTags.h"
+#include "AI/RPGAIController.h"
+#include "BehaviorTree/BehaviorTree.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 ARPGEnemy::ARPGEnemy()
@@ -25,6 +28,16 @@ ARPGEnemy::ARPGEnemy()
 	//HPÉoÅ[ÇÃéÊÇËÇ¬ÇØ
 	HealthBar = CreateDefaultSubobject<UWidgetComponent>("HealthBar");
 	HealthBar->SetupAttachment(GetRootComponent());
+}
+
+void ARPGEnemy::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (!HasAuthority())return;
+	RPGAIController = Cast<ARPGAIController>(NewController);
+	RPGAIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
+	RPGAIController->RunBehaviorTree(BehaviorTree);
 }
 
 void ARPGEnemy::HighLightActor()
